@@ -7,7 +7,7 @@
 definition(
     name: "Low Battery Notification",
     namespace: "jscgs350",
-    author: "jsconst@gmail.com",
+    author: "SmartThings",
     description: "Alerts if any battery powered device falls below a specified percent.",
     category: "My Apps",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
