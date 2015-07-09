@@ -53,11 +53,11 @@ def illuminanceHandler(evt) {
     def darkness = settings.luxLevel.toInteger()
     log.debug "Lux level for darkness is $darkness and the sensor sent $evt.integerValue"
 	if (evt.integerValue < darkness) {
-		send "Lux level for darkness is $darkness and the sensor sent $evt.integerValue, so turning ON the following switches: $switches"
+		send "Lux level for darkness is $darkness and the sensor sent $evt.integerValue, so turning ON the following switches: $lights"
         lights.on()
 	}
 	else {
-		send "Lux level for darkness is $darkness and the sensor sent $evt.integerValue, so turning OFF the following switches: $switches"
+		send "Lux level for darkness is $darkness and the sensor sent $evt.integerValue, so turning OFF the following switches: $lights"
         lights.off()
 	}
 }
