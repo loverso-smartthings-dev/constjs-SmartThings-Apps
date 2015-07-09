@@ -34,6 +34,10 @@ preferences {
 	section("Which lights to turn on/off?") {
 		input "lights", "capability.switch", multiple: true
 	}
+    section( "Notifications" ) {
+        input "sendPushMessage", "enum", title: "Send a push notification?", metadata:[values:["No", "Yes"]]
+        input "phoneNumber", "phone", title: "Send a text message?", required: false
+    }
 }
 
 def installed() {
@@ -49,9 +53,25 @@ def illuminanceHandler(evt) {
     def darkness = settings.luxLevel.toInteger()
     log.debug "Lux level for darkness is $darkness and the sensor sent $evt.integerValue"
 	if (evt.integerValue < darkness) {
-		lights.on()
+		send "Lux level for darkness is $darkness and the sensor sent $evt.integerValue, so turning ON the following switches: $switches"
+        lights.on()
 	}
 	else {
-		lights.off()
+		send "Lux level for darkness is $darkness and the sensor sent $evt.integerValue, so turning OFF the following switches: $switches"
+        lights.off()
 	}
+}
+
+private send(msg) {
+        if ( sendPushMessage != "No" ) {
+            log.debug( "sending push message" )
+            sendPush( msg )
+        }
+
+        if ( phoneNumber ) {
+            log.debug( "sending text message" )
+            sendSms( phoneNumber, msg )
+        }
+
+        log.debug msg
 }
