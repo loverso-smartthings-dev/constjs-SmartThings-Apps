@@ -1,19 +1,5 @@
 /**
- *  Pollster - The SmartThings Polling Daemon.
- *
- *  Many SmartThings devices rely on polling to update their status
- *  periodically. SmartThings' built-in polling engine has a fixed polling
- *  interval of approximately 10 minutes, which may not be fast enough for
- *  some devices. Pollster, on the other hand, can poll devices as fast as
- *  every minute. Devices can be arranged into four groups with configurable
- *  polling intervals.
- *
- *  Version 1.2 (2/8/2015)
- *
- *  The latest version of this file can be found at:
- *  https://github.com/statusbits/smartthings/blob/master/Pollster/Pollster.groovy
- *
- *  --------------------------------------------------------------------------
+ *  Refresher - The SmartThings Polling Daemon.
  *
  *  Copyright (c) 2014 Statusbits.com
  *
@@ -31,9 +17,9 @@
  */
 
 definition(
-    name: "Pollster",
+    name: "Refresher",
     namespace: "jschs350",
-    author: "geko@statusbits.com",
+    author: "a cool developer",
     description: "Poll or refresh device status periodically.",
     category: "My Apps",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
@@ -41,7 +27,7 @@ definition(
 
 preferences {
     section("About") {
-        paragraph "Pollster works behind the scenes and periodically calls " +
+        paragraph "Refresher works behind the scenes and periodically calls " +
         "poll() or refresh() command for selected devices. Devices can be " +
         "arranged into four polling groups with configurable polling " +
         "intervals down to 1 minute."
