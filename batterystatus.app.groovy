@@ -174,20 +174,6 @@ def pageConfigure() {
         uninstall:      true
     ]
 
-    def inputPush      = [
-        name:           "pushMessage",
-        type:           "bool",
-        title:          "Send Push notifications",
-        defaultValue:   true
-    ]
-
-    def inputSMS       = [
-        name:           "phoneNumber",
-        type:           "phone",
-        title:          "Send SMS notification",
-        required:       false
-    ]
-
 	return dynamicPage(pageProperties) {
         section("About") {
             paragraph helpPage
@@ -201,11 +187,13 @@ def pageConfigure() {
             input inputLevel1
             input inputLevel3
         }
-        
+
         section("Notification") {
-			input inputPush
-			input inputSMS
-		}
+        	input("recipients", "contact", title: "Send notifications to") {
+            	input(name: "sms", type: "phone", title: "Send A Text To", description: null, required: false)
+            	input(name: "pushNotification", type: "bool", title: "Send a push notification", description: null, defaultValue: false)
+        	}
+    	}
 
         section([title:"Options", mobileOnly:true]) {
             label title:"Assign a name", required:false
@@ -231,16 +219,16 @@ def initialize() {
 }
 
 def send(msg) {
-    log.debug msg
-
-	if (settings.pushMessage) {
-        sendPush(msg)
-    } else {
-        sendNotificationEvent(msg)
+    if (location.contactBookEnabled) {
+        sendNotificationToContacts(msg, recipients)
     }
-
-    if (settings.phoneNumber != null) {
-    	sendSms(phoneNumber, msg) 
+    else {
+        if (sms) {
+            sendSms(sms, msg)
+        }
+        if (pushNotification) {
+            sendPush(msg)
+        }
     }
 }
 
