@@ -195,6 +195,10 @@ def pageConfigure() {
         	}
     	}
 
+		section("Minimum time between messages (optional)") {
+			input "frequency", "decimal", title: "Minutes", required: false
+		}
+
         section([title:"Options", mobileOnly:true]) {
             label title:"Assign a name", required:false
         }
@@ -219,16 +223,31 @@ def initialize() {
 }
 
 def send(msg) {
-    if (location.contactBookEnabled) {
-        sendNotificationToContacts(msg, recipients)
+	if (frequency) {
+	    if (location.contactBookEnabled) {
+	        sendNotificationToContacts(msg, recipients)
+	    }
+	    else {
+	        if (sms) {
+	            sendSms(sms, msg)
+	        }
+	        if (pushNotification) {
+	            sendPush(msg)
+	        }
+	    }
     }
     else {
-        if (sms) {
-            sendSms(sms, msg)
-        }
-        if (pushNotification) {
-            sendPush(msg)
-        }
+	    if (location.contactBookEnabled) {
+	        sendNotificationToContacts(msg, recipients)
+	    }
+	    else {
+	        if (sms) {
+	            sendSms(sms, msg)
+	        }
+	        if (pushNotification) {
+	            sendPush(msg)
+	        }
+	    }
     }
 }
 
