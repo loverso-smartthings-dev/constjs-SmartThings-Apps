@@ -11,17 +11,20 @@ definition(
     description: "Alerts if any battery powered device falls below a specified percent.",
     category: "My Apps",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
-    iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience%402x.png"
+    iconX2Url: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience@2x.png"
 )
 
 preferences {
 	section("Battery Alarm Level") {
 		input "alarmAt", "number", title: "Alert when below...", required: true
-        input "batteryDevices", "capability.battery", title: "Which devices?", multiple: true
+        input "batteryDevices", "capability.battery", title: "Which Devices?", multiple: true
 	}
-    section( "Notifications" ) {
-		input "phoneNumber", "phone", title: "Send a text message?", required: false
-	}
+    section("Send Notifications?") {
+        input("recipients", "contact", title: "Send notifications to") {
+            input "phone", "phone", title: "Warn with text message (optional)",
+                description: "Phone Number", required: false
+        }
+    }
 }
 
 def installed() {
@@ -50,7 +53,9 @@ def initialize() {
 
 def doBatteryCheck() {
 
-	def belowLevelCntr = 0
+	log.debug "recipients configured: $recipients"
+	
+    def belowLevelCntr = 0
     
     def pushMsg = ""
     
@@ -78,6 +83,15 @@ def doBatteryCheck() {
     log.debug(pushMsg)
     
     /* sendPush(pushMsg) */
-    sendSms(phoneNumber,pushMsg)
+    //sendSms(phoneNumber,pushMsg)
+    if (location.contactBookEnabled && recipients) {
+        log.debug "contact book enabled!"
+        sendNotificationToContacts(pushMsg, recipients)
+    } else {
+        log.debug "contact book not enabled"
+        if (phone) {
+            sendSms(phone, pushMsg)
+        }
+    }
 
 }
