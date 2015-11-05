@@ -21,7 +21,7 @@
  *  This SmartApp helps you see a quick status of selected devices by checking to see if at least one event exists for the selected device(s).
  *  If no events are found:
  *  	1. You have a device that hasn't been used or reported any event, like infrequently used switches.  These may not have dropped from your network.
- *	2. You have a device that may still be working, like temp, motion, or humidity sensors, but has dropped of your network for some reason.
+ *		2. You have a device that may still be working, like temp, motion, or humidity sensors, but has dropped of your network for some reason.
  *
  *  Notes
  *  ----------------
@@ -83,11 +83,11 @@ def pageStatus() {
     	def rightNow = new Date()
 		settings.motiondevices.each() {
 			def lastTime = it.events(max: 1).date
-            		def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
-            		def xhours = (hours.toFloat()/1).round(2)
 			try {
 				if (lastTime) {
-					goodlist += "$it.displayName: $xhours hrs old\n"
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
 				} else {
 					badlist += "$it.displayName\n"	
 				}
@@ -100,11 +100,11 @@ def pageStatus() {
 		}
 		settings.humiditydevices.each() {
 			def lastTime = it.events(max: 1).date
-            		def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
-            		def xhours = (hours.toFloat()/1).round(2)
 			try {
 				if (lastTime) {
-					goodlist += "$it.displayName: $xhours hrs old\n"
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
 				} else {
 					badlist += "$it.displayName\n"	
 				}
@@ -117,11 +117,11 @@ def pageStatus() {
 		}
 		settings.leakdevices.each() {
 			def lastTime = it.events(max: 1).date
-            		def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
-            		def xhours = (hours.toFloat()/1).round(2)
 			try {
 				if (lastTime) {
-					goodlist += "$it.displayName: $xhours hrs old\n"
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
 				} else {
 					badlist += "$it.displayName\n"	
 				}
@@ -134,11 +134,11 @@ def pageStatus() {
 		}
 		settings.thermodevices.each() {
 			def lastTime = it.events(max: 1).date
-            		def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
-            		def xhours = (hours.toFloat()/1).round(2)
 			try {
 				if (lastTime) {
-					goodlist += "$it.displayName: $xhours hrs old\n"
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
 				} else {
 					badlist += "$it.displayName\n"	
 				}
@@ -151,11 +151,11 @@ def pageStatus() {
 		}
 		settings.contactdevices.each() {
 			def lastTime = it.events(max: 1).date
-            		def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
-            		def xhours = (hours.toFloat()/1).round(2)
 			try {
 				if (lastTime) {
-					goodlist += "$it.displayName: $xhours hrs old\n"
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
 				} else {
 					badlist += "$it.displayName\n"	
 				}
@@ -168,11 +168,11 @@ def pageStatus() {
 		}
 		settings.lockdevices.each() {
 			def lastTime = it.events(max: 1).date
-            		def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
-            		def xhours = (hours.toFloat()/1).round(2)
 			try {
 				if (lastTime) {
-					goodlist += "$it.displayName: $xhours hrs old\n"
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
 				} else {
 					badlist += "$it.displayName\n"	
 				}
@@ -185,11 +185,11 @@ def pageStatus() {
 		}
 		settings.alarmdevices.each() {
 			def lastTime = it.events(max: 1).date
-            		def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
-            		def xhours = (hours.toFloat()/1).round(2)
 			try {
 				if (lastTime) {
-					goodlist += "$it.displayName: $xhours hrs old\n"
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
 				} else {
 					badlist += "$it.displayName\n"	
 				}
@@ -202,11 +202,11 @@ def pageStatus() {
 		}
 		settings.switchdevices.each() {
 			def lastTime = it.events(max: 1).date
-            		def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
-            		def xhours = (hours.toFloat()/1).round(2)
 			try {
 				if (lastTime) {
-					goodlist += "$it.displayName: $xhours hrs old\n"
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
 				} else {
 					badlist += "$it.displayName\n"	
 				}
@@ -219,11 +219,11 @@ def pageStatus() {
 		}
 		settings.presencedevices.each() {
 			def lastTime = it.events(max: 1).date
-            		def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
-            		def xhours = (hours.toFloat()/1).round(2)
 			try {
 				if (lastTime) {
-					goodlist += "$it.displayName: $xhours hrs old\n"
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
 				} else {
 					badlist += "$it.displayName\n"	
 				}
@@ -236,7 +236,7 @@ def pageStatus() {
 		}
 
 		if (goodlist) {
-			section("Devices Reporting Events") {
+			section("Devices Reporting (hrs old)") {
 				paragraph goodlist.trim()
 			}
 		}
@@ -272,9 +272,9 @@ def pageConfigure() {
 	def inputThermoDevices = [name:"thermodevices",type:"capability.thermostat",title:"Which thermostats?",multiple:true,required:false]
 	def inputContactDevices = [name:"contactdevices",type:"capability.contactSensor",title:"Which open/close contact sensors?",multiple:true,required:false]
 	def inputLockDevices = [name:"lockdevices",type:"capability.lock",title:"Which locks?",multiple:true,required:false]
-    	def inputAlarmDevices = [name:"alarmdevices",type:"capability.alarm",title:"Which alarms/sirens?",multiple:true,required:false]
-    	def inputSwitchDevices = [name:"switchdevices",type:"capability.switch",title:"Which switches?",multiple:true,required:false]
-    	def inputPresenceDevices = [name:"presencedevices",type:"capability.presenceSensor",title:"Which presence sensors?",multiple:true,required:false]
+    def inputAlarmDevices = [name:"alarmdevices",type:"capability.alarm",title:"Which alarms/sirens?",multiple:true,required:false]
+    def inputSwitchDevices = [name:"switchdevices",type:"capability.switch",title:"Which switches?",multiple:true,required:false]
+    def inputPresenceDevices = [name:"presencedevices",type:"capability.presenceSensor",title:"Which presence sensors?",multiple:true,required:false]
 
 	def pageProperties = [name:"pageConfigure",
 		title:          "Quick Device Check Configurator",
@@ -293,10 +293,10 @@ def pageConfigure() {
 			input inputLeakDevices
 			input inputThermoDevices
 			input inputContactDevices
-            		input inputLockDevices
-            		input inputAlarmDevices
-            		input inputSwitchDevices
-            		input inputPresenceDevices
+            input inputLockDevices
+            input inputAlarmDevices
+            input inputSwitchDevices
+            input inputPresenceDevices
 		}
 
 		section([title:"Available Options", mobileOnly:true]) {
