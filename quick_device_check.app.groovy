@@ -33,6 +33,7 @@
  *  Revision History
  *  ----------------
  *  2015-11-04  v1.0.0  Initial release
+ *  2015-11-07  v1.0.1  Added Smoke/CO2 detectors to the list of available devices to check
  *
  */
 
@@ -71,6 +72,7 @@ def pageStatus() {
         && settings.lockdevices == null
         && settings.alarmdevices == null
         && settings.switchdevices == null
+        && settings.smokedevices == null
         && settings.presencedevices == null) {
 			return pageConfigure()
 	}
@@ -234,7 +236,23 @@ def pageStatus() {
 					errorlist += "$it.displayName\n"
 			}
 		}
+		settings.smokedevices.each() {
+			def lastTime = it.events(max: 1).date
+			try {
+				if (lastTime) {
+                    def hours = (((rightNow.time - lastTime.time) / 60000) / 60)
+            		def xhours = (hours.toFloat()/1).round(2)
+					goodlist += "$it.displayName: $xhours\n"
+				} else {
+					badlist += "$it.displayName\n"	
+				}
 
+			} catch (e) {
+					log.trace "Caught error checking a device."
+					log.trace e
+					errorlist += "$it.displayName\n"
+			}
+		}
 		if (goodlist) {
 			section("Devices Reporting (hrs old)") {
 				paragraph goodlist.trim()
@@ -275,6 +293,7 @@ def pageConfigure() {
     def inputAlarmDevices = [name:"alarmdevices",type:"capability.alarm",title:"Which alarms/sirens?",multiple:true,required:false]
     def inputSwitchDevices = [name:"switchdevices",type:"capability.switch",title:"Which switches?",multiple:true,required:false]
     def inputPresenceDevices = [name:"presencedevices",type:"capability.presenceSensor",title:"Which presence sensors?",multiple:true,required:false]
+    def inputSmokeDevices = [name:"smokedevices",type:"capability.smokeDetector",title:"Which Smoke/CO2 detectors?",multiple:true,required:false]
 
 	def pageProperties = [name:"pageConfigure",
 		title:          "Quick Device Check Configurator",
@@ -297,6 +316,7 @@ def pageConfigure() {
             input inputAlarmDevices
             input inputSwitchDevices
             input inputPresenceDevices
+            input inputSmokeDevices
 		}
 
 		section([title:"Available Options", mobileOnly:true]) {
