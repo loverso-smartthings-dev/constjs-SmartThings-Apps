@@ -10,7 +10,7 @@
 definition(
     name: "Programmable Thermostat Settings",
     namespace: "jscgs350",
-    author: "Ramit Bhalla",
+    author: "RBoy",
     description: "Program thermostat(s) from withing SmartThings",
     category: "My Apps",
     iconUrl: "https://s3.amazonaws.com/smartapp-icons/Convenience/Cat-Convenience.png",
