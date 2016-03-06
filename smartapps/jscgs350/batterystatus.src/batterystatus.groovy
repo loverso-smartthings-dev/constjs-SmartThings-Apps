@@ -37,10 +37,13 @@
  *  The latest version of this file can be found at:
  *    https://github.com/notoriousbdg/SmartThings.BatteryMonitor
  *
+ * Based upon the above; this can be found at:
+ *    https://github.com/constjs/SmartThings-Apps
+ *
  */
 
 definition(
-    name: "BatteryMonitor",
+    name: "BatteryStatus",
     namespace: "jscgs350",
     author: "Brandon Gordon",
     description: "SmartApp to monitor battery levels.",
